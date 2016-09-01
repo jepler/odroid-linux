@@ -505,8 +505,10 @@ out:
 
 void au_pin_hdir_set_owner(struct au_pin *p, struct task_struct *task)
 {
+#ifndef CONFIG_PREEMPT_RT_FULL
 #if defined(CONFIG_DEBUG_MUTEXES) || defined(CONFIG_SMP)
 	p->hdir->hi_inode->i_mutex.owner = task;
+#endif
 #endif
 }
 
